@@ -83,12 +83,13 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
   }
 
   @ReactMethod
-  public void paymentRequest(final Callback successCallback, final Callback errorCallback) {
+  public void paymentRequest(String submitText, final Callback successCallback, final Callback errorCallback) {
     this.successCallback = successCallback;
     this.errorCallback = errorCallback;
 
     PaymentRequest paymentRequest = new PaymentRequest()
-    .clientToken(this.getToken());
+    .clientToken(this.getToken())
+    .submitButtonText(submitText);
 
     (getCurrentActivity()).startActivityForResult(
       paymentRequest.getIntent(getCurrentActivity()),

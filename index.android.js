@@ -16,9 +16,12 @@ module.exports = {
     });
   },
 
-  showPaymentViewController() {
+  showPaymentViewController(submitText) {
     return new Promise(function(resolve, reject) {
-      Braintree.paymentRequest((nonce) => resolve(nonce), (error) => reject(error));
+      if (submitText == null) {
+        submitText = 'PURCHASE';
+      }
+      Braintree.paymentRequest(submitText, (nonce) => resolve(nonce), (error) => reject(error));
     });
   },
 };
